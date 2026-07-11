@@ -367,4 +367,5 @@ HTML = r'''<!DOCTYPE html>
 </html>'''
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5050)
+    import os as _os
+    app.run(host="0.0.0.0", port=int(_os.environ.get("PORT", 5050)), debug=False)

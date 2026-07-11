@@ -20,6 +20,7 @@ A pink-themed note-taking web app built with **Flask** and **SQLite**, deployabl
 ```
 cloud/
   server.py          # single-file Flask app (HTML inlined)
+  render.yaml        # Render Blueprint for one-click deploy
   templates/
     index.html       # standalone HTML (for reference; not used at runtime)
   requirements.txt   # flask>=3.0
@@ -186,11 +187,36 @@ PythonAnywhere is ideal because it has a persistent filesystem (SQLite data surv
 | Flask not found | The free tier has Flask pre-installed. If missing, open a Bash console and run `pip install --user flask`. |
 | App not updating after upload | Hit the green **Reload** button on the Web tab. |
 
-### Alternatives
+### Render (Free Tier)
+
+Render offers a free web service tier. The app is configured via `render.yaml` for one-click deploy.
+
+**Important:** Render's free filesystem is ephemeral — `notes.db` is lost on each deploy or restart. Use the **backup** button regularly to save your data, and **restore** after redeploys.
+
+#### Option A: Blueprint (One-Click)
+
+1. Push this repo to GitHub
+2. Go to [dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint**
+3. Connect your GitHub repo — Render auto-detects `render.yaml`
+4. Click **Apply**
+
+#### Option B: Manual Web Service
+
+1. Dashboard → **New** → **Web Service**
+2. Connect your repo
+3. Settings:
+   - **Environment:** Python 3
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `python server.py`
+   - **Plan:** Free
+4. Click **Create Web Service**
+
+Your app will be live at `https://pink-notes.onrender.com` (or your chosen name).
+
+### Other Platforms
 
 | Platform | Notes |
 |----------|-------|
-| **Render** | Free tier, but filesystem is ephemeral — SQLite data is lost on restart. Use backup/restore regularly. |
 | **Fly.io** | Free tier with persistent volumes. Requires credit card for verification and a `Dockerfile`. |
 | **Vercel / Netlify** | Static hosting only. Not suitable for Flask + SQLite without serverless adaptation. |
 
