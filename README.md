@@ -207,7 +207,7 @@ Render offers a free web service tier. The app is configured via `render.yaml` f
 3. Settings:
    - **Environment:** Python 3
    - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `python server.py`
+   - **Start Command:** `gunicorn server:app`
    - **Plan:** Free
 4. Click **Create Web Service**
 
