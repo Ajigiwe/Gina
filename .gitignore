@@ -1,0 +1,4 @@
+notes.db
+backup.sql
+__pycache__/
+*.pyc
